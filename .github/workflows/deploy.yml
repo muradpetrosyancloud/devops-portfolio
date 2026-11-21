@@ -1,0 +1,48 @@
+
+name: Deploy Portfolio to Cloud Run
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      IMAGE: us-central1-docker.pkg.dev/devops-512809/cloud-run-source-deploy/devops-portfolio:${{ github.sha }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v3
+        with:
+          project_id: devops-512809
+          workload_identity_provider: projects/945628513982/locations/global/workloadIdentityPools/fileconvert-pool/providers/portfolio-github
+          service_account: portfolio-deployer@devops-512809.iam.gserviceaccount.com
+
+      - name: Install Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@v3
+
+      - name: Configure Docker authentication
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
+      - name: Build Docker image
+        run: docker build -t "$IMAGE" .
+
+      - name: Push image to Artifact Registry
+        run: docker push "$IMAGE"
+
+      - name: Deploy to Cloud Run
+        run: gcloud run deploy devops-portfolio --image="$IMAGE" --project=devops-512809 --region=us-central1 --service-account=portfolio-runtime@devops-512809.iam.gserviceaccount.com --port=8080 --memory=256Mi --min-instances=0 --max-instances=1 --quiet
+
+      - name: Verify deployment
+        run: |
+          URL=$(gcloud run services describe devops-portfolio --project=devops-512809 --region=us-central1 --format="value(status.url)")
+          curl -fsS "$URL/health"
