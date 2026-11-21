@@ -1,0 +1,246 @@
+
+:root {
+  color-scheme: dark;
+
+  --bg: #020617;
+  --panel: #0f172a;
+  --panel-strong: #111827;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #1a73e8;
+  --accent-2: #06b6d4;
+  --border: rgba(255, 255, 255, 0.12);
+  --shadow: 0 20px 45px rgba(2, 6, 23, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* MAIN PAGE */
+.page-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+}
+
+/* INTRODUCTION */
+.hero {
+  padding: 2rem 0 2.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  background: rgba(6, 182, 212, 0.12);
+  color: #7dd3fc;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, 3vw, 2.8rem);
+  margin: 0.1rem 0 0.6rem;
+}
+
+.hero p:not(.eyebrow) {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 680px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* PROJECTS SECTION */
+.projects-section {
+  margin-top: 2rem;
+}
+
+.section-header {
+  margin-bottom: 1.25rem;
+}
+
+.section-header h2 {
+  font-size: 1.35rem;
+  margin: 0 0 0.4rem;
+}
+
+.section-header p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 640px;
+  line-height: 1.65;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+}
+
+/* PROJECT CARDS */
+.project-card {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.95),
+    rgba(15, 23, 42, 0.88)
+  );
+
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--accent);
+  border-radius: 18px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(26, 115, 232, 0.4);
+  box-shadow: 0 25px 50px rgba(2, 6, 23, 0.55);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.card-top h3 {
+  font-size: 1.12rem;
+  margin: 0;
+}
+
+.project-card p {
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0 0 1rem;
+}
+
+/* STATUS LABELS */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(26, 115, 232, 0.12);
+  color: #93c5fd;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* TECHNOLOGY BADGES */
+.tech-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0 0 1.1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.tech-badges li {
+  padding: 0.4rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(6, 182, 212, 0.12);
+  color: #a5f3fc;
+  font-size: 0.78rem;
+  border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+/* BUTTONS */
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: white;
+  box-shadow: 0 12px 25px rgba(26, 115, 232, 0.25);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+.btn-secondary {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.16);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+/* RESPONSIVE DESIGN */
+@media (min-width: 760px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .page-shell {
+    padding: 2.5rem 1.5rem 4rem;
+  }
+}
